@@ -79,24 +79,17 @@ class _MyHomePageState extends State<MyHomePage> {
     int selectedIndex = appState.selectedIndex;
 
     Widget page;
-    String title;
     switch (selectedIndex) {
       case 0:
         page = HomePage();
-        title = "Home";
         break;
       case 1:
         page = InfoPage();
-        title = "User info";
         break;
       default:
         throw UnimplementedError('no widget for $selectedIndex');
     }
     return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-      ),
       body: page,
     );
   }
@@ -109,50 +102,75 @@ class HomePage extends StatelessWidget {
     String username = '';
 
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            if (appState.error != null)
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  appState.error!,
-                  style: TextStyle(color: Colors.red),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/bkgrnd.jpg'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              if (appState.error != null)
+                Container(
+                  padding: const EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.8),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Text(
+                    appState.error!,
+                    style: TextStyle(color: Colors.red),
+                  ),
+                ),
+              Container(
+                width: MediaQuery.of(context).size.width * 0.5,
+                constraints: BoxConstraints(minWidth: 300, maxWidth: 600),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.9),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                padding: EdgeInsets.all(16),
+                child: Column(
+                  children: [
+                    TextFormField(
+                      decoration: InputDecoration(
+                        labelText: "Username",
+                        border: OutlineInputBorder(),
+                        hintText: "Enter your username",
+                        filled: true,
+                        fillColor: Colors.white,
+                      ),
+                      onChanged: (value) {
+                        username = value;
+                      },
+                      onFieldSubmitted: (_) {
+                        if (username.isNotEmpty) {
+                          appState.searchUser(username);
+                        }
+                      },
+                    ),
+                    SizedBox(height: 20),
+                    if (appState.isLoading)
+                      CircularProgressIndicator()
+                    else
+                      ElevatedButton(
+                        onPressed: () {
+                          if (username.isNotEmpty) {
+                            appState.searchUser(username);
+                          }
+                        },
+                        child: Text("search")
+                      ),
+                  ],
                 ),
               ),
-            Container(
-              width: MediaQuery.of(context).size.width * 0.5,
-              constraints: BoxConstraints(minWidth: 300, maxWidth: 600),
-              child: TextFormField(
-                decoration: InputDecoration(
-                  labelText: "Username",
-                  border: OutlineInputBorder(),
-                  hintText: "Enter your username",
-                ),
-                onChanged: (value) {
-                  username = value;
-                },
-                onFieldSubmitted: (_) {
-                  if (username.isNotEmpty) {
-                    appState.searchUser(username);
-                  }
-                },
-              ),
-            ),
-            SizedBox(height: 20),
-            if (appState.isLoading)
-              CircularProgressIndicator()
-            else
-              ElevatedButton(
-                onPressed: () {
-                  if (username.isNotEmpty) {
-                    appState.searchUser(username);
-                  }
-                },
-                child: Text("search")
-              ),
-          ],
+              SizedBox(height: 20),
+              Image.asset('assets/images/logo.svg'),
+            ],
+          ),
         ),
       ),
     );
