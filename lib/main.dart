@@ -39,6 +39,11 @@ class AppState extends ChangeNotifier {
 
   final ApiService	apiService = ApiService();
 
+  setSelectedIndex(int index) {
+    selectedIndex = index;
+    notifyListeners();
+  }
+
   Future<void> searchUser(String name) async {
     isLoading = true;
     error = null;
@@ -256,7 +261,7 @@ class InfoPage extends StatelessWidget {
                 SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
-                    appState.selectedIndex = 0;
+                    appState.setSelectedIndex(0);
                   },
                   child: Text("Back to Search")
                 ),
