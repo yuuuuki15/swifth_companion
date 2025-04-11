@@ -167,8 +167,6 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 20),
-              Image.asset('assets/images/logo.svg'),
             ],
           ),
         ),
