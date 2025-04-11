@@ -27,9 +27,15 @@ class MyApp extends StatelessWidget {
 
 class AppState extends ChangeNotifier {
   int selectedIndex = 0;
+  String username = '';
 
   void setIndex(int index) {
     selectedIndex = index;
+    notifyListeners();
+  }
+
+  void setUsername(String name) {
+    username = name;
     notifyListeners();
   }
 }
@@ -63,14 +69,11 @@ class _MyHomePageState extends State<MyHomePage> {
       default:
         throw UnimplementedError('no widget for $selectedIndex');
     }
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(title: Text(title)),
+      appBar: AppBar(
+        title: Text(title),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+      ),
       body: page,
     );
   }
@@ -80,14 +83,47 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var appState = context.read<AppState>();
+    String username = '';
+
+    void searchUser() {
+      appState.setUsername(username);
+      appState.setIndex(1);
+    }
 
     return Scaffold(
       body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            appState.setIndex(1);
-          },
-          child: Text("search")
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width * 0.5,
+              constraints: BoxConstraints(minWidth: 300, maxWidth: 600),
+              child: TextFormField(
+                decoration: InputDecoration(
+                    labelText: "Username",
+                    border: OutlineInputBorder(),
+                    hintText: "Enter your username",
+                ),
+                onChanged: (value) {
+                  username = value;
+                },
+                onFieldSubmitted: (_) {
+                  searchUser();
+                },
+                validator: (value) {
+                    if (value == null || value.isEmpty) {
+                    return 'Enter your username';
+                    }
+                    return null;
+                },
+              ),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: searchUser,
+              child: Text("search")
+            ),
+          ],
         ),
       ),
     );
@@ -97,15 +133,25 @@ class HomePage extends StatelessWidget {
 class InfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var appState = context.read<AppState>();
+    var appState = context.watch<AppState>();
 
     return Scaffold(
       body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            appState.setIndex(0);
-          },
-          child: Text("back")
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Username: ${appState.username}',
+              style: TextStyle(fontSize: 24),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                appState.setIndex(0);
+              },
+              child: Text("back")
+            ),
+          ],
         ),
       ),
     );
