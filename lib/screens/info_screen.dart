@@ -1,0 +1,118 @@
+import 'package:flutter/material.dart';
+import '../models/app_state.dart';
+import 'package:provider/provider.dart';
+
+class InfoPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    var appState = context.watch<AppState>();
+
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (appState.userData.isNotEmpty) ...[
+                  if (appState.userData['image_url'] != null)
+                    CircleAvatar(
+                      radius: 50,
+                      backgroundImage: NetworkImage(appState.userData['image_url']),
+                    ),
+                  SizedBox(height: 20),
+
+                  Text(
+                    'Login: ${appState.userData['login']}',
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    'Email: ${appState.userData['email'] ?? 'Not available'}',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  SizedBox(height: 20),
+
+                  if (appState.userData['cursus_users'] != null) ...[
+                    Text(
+                      'Cursus Information',
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                    ...List.from(appState.userData['cursus_users']).map((cursus) {
+                      return Card(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: [
+                              Text(
+                                'Cursus: ${cursus['cursus']['name']}',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                              Text(
+                                'Level: ${cursus['level']?.toStringAsFixed(2) ?? 'N/A'}',
+                                style: TextStyle(fontSize: 16),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                  ],
+                  SizedBox(height: 20),
+
+                  if (appState.userData['projects_users'] != null) ...[
+                    Text(
+                      'Projects',
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                    ...List.from(appState.userData['projects_users'])
+                      .where((project) => project['status'] == 'finished')
+                      .map((project) {
+                        final bool isPassed = project['validated?'] ?? false;
+                        return Card(
+                          child: ListTile(
+                            title: Text(project['project']['name']),
+                            subtitle: Text('Final mark: ${project['final_mark'] ?? 'N/A'}'),
+                            trailing: Icon(
+                              isPassed ? Icons.check_circle : Icons.cancel,
+                              color: isPassed ? Colors.green : Colors.red,
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                  ],
+                  SizedBox(height: 20),
+
+                  if (appState.userData['cursus_users'] != null &&
+                      appState.userData['cursus_users'].isNotEmpty &&
+                      appState.userData['cursus_users'][0]['skills'] != null) ...[
+                    Text(
+                      'Skills',
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                    ...List.from(appState.userData['cursus_users'][0]['skills']).map((skill) {
+                      return Card(
+                        child: ListTile(
+                          title: Text(skill['name']),
+                          trailing: Text('Level: ${skill['level']?.toStringAsFixed(2) ?? 'N/A'}'),
+                        ),
+                      );
+                    }).toList(),
+                  ],
+                ],
+
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    appState.setSelectedIndex(0);
+                  },
+                  child: Text("Back to Search")
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

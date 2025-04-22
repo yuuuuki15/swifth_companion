@@ -25,7 +25,7 @@ class ApiService {
       final token = jsonDecode(tokenResponse.body)['access_token'];
 
       final userResponse = await http.get(
-        Uri.parse('${_apiUrl}/users/$username'),
+        Uri.parse('$_apiUrl/users/$username'),
         headers: {'Authorization': 'Bearer $token'},
       );
 
