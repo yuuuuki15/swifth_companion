@@ -24,7 +24,7 @@ class HomePage extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(8.0),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.8),
+                    // color: Colors.white.withOpacity(0.8),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Text(
@@ -36,7 +36,7 @@ class HomePage extends StatelessWidget {
                 width: MediaQuery.of(context).size.width * 0.5,
                 constraints: BoxConstraints(minWidth: 300, maxWidth: 600),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.9),
+                //   color: Colors.white.withOpacity(0.9),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 padding: EdgeInsets.all(16),
@@ -44,11 +44,11 @@ class HomePage extends StatelessWidget {
                   children: [
                     TextFormField(
                       decoration: InputDecoration(
-                        labelText: "Username",
                         border: OutlineInputBorder(),
                         hintText: "Enter your username",
                         filled: true,
                         fillColor: Colors.white,
+                        hintStyle: TextStyle(color: Color(0xff1e3629)),
                       ),
                       onChanged: (value) {
                         username = value;
@@ -64,6 +64,13 @@ class HomePage extends StatelessWidget {
                       CircularProgressIndicator()
                     else
                       ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          foregroundColor: Color(0xff1e3629),
+                        ),
                         onPressed: () {
                           if (username.isNotEmpty) {
                             appState.searchUser(username);

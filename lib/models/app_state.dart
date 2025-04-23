@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../services/api_service.dart';
 
 class AppState extends ChangeNotifier {
-  int	selectedIndex = 0;
+  int	selectedIndex = 1;
   String	username = '';
   Map<String, dynamic>	userData = {};
   bool	isLoading = false;

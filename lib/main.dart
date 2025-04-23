@@ -28,28 +28,20 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.amber),
       ),
-      home: const MyHomePage(title: 'Home'),
+      home: const AppRouter(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class AppRouter extends StatelessWidget {
+  const AppRouter({super.key});
 
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<AppState>();
-    int selectedIndex = appState.selectedIndex;
 
     Widget page;
-    switch (selectedIndex) {
+    switch (appState.selectedIndex) {
       case 0:
         page = HomePage();
         break;
@@ -57,8 +49,9 @@ class _MyHomePageState extends State<MyHomePage> {
         page = InfoPage();
         break;
       default:
-        throw UnimplementedError('no widget for $selectedIndex');
+        throw UnimplementedError('no widget for ${appState.selectedIndex}');
     }
+
     return Scaffold(
       body: page,
     );
