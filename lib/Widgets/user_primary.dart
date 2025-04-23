@@ -11,14 +11,15 @@ class user_primary extends StatelessWidget {
     return Stack(
       alignment: Alignment.center,
       children: [
-        Opacity(
-          opacity: 0.3,
-          child: Container(
-            decoration: BoxDecoration(
-              color: Color(0xFF333333),
-              borderRadius: BorderRadius.circular(10),
+        Positioned.fill(
+          child: Opacity(
+            opacity: 0.3,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Color(0xFF333333),
+                borderRadius: BorderRadius.circular(10),
+              ),
             ),
-            height: 300,
           ),
         ),
         Positioned(
