@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../models/app_state.dart';
 
 class user_primary extends StatelessWidget {
   const user_primary({
     super.key,
+    required this.appState,
   });
+
+  final AppState appState;
 
   @override
   Widget build(BuildContext context) {
+    print('userData: ${appState.userData}');
     return Stack(
       alignment: Alignment.center,
       children: [
@@ -33,7 +38,7 @@ class user_primary extends StatelessWidget {
               border: Border.all(color: Color.fromARGB(255, 142, 142, 142), width: 0.3),
             ),
             child: Text(
-              'unavailable',
+              appState.userData['location'] != null ? appState.userData['location'] : 'unavailable',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 10,
@@ -46,21 +51,20 @@ class user_primary extends StatelessWidget {
           padding: const EdgeInsets.all(20),
           child: Column(
             children: [
-              Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/images/bkgrnd.jpg'),
-                    fit: BoxFit.cover,
+              if (appState.userData['image']['link'] != null)
+                Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: Color(0xFF35c47f), width: 2),
                   ),
-                  borderRadius: BorderRadius.circular(100),
-                  border: Border.all(color: Color(0xFF35c47f), width: 2),
+                  child: CircleAvatar(
+                    radius: 50,
+                    backgroundImage: NetworkImage(appState.userData['image']['link']),
+                  ),
                 ),
-                height: 100,
-                width: 100,
-              ),
               SizedBox(height: 10),
               Text(
-                'Yuki Kawakita',
+                appState.userData['first_name'] + ' ' + appState.userData['last_name'],
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               SizedBox(height: 10),
@@ -68,7 +72,7 @@ class user_primary extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    'ykawakit',
+                    appState.userData['login'],
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ],
@@ -79,7 +83,7 @@ class user_primary extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    '11',
+                    appState.userData['cursus_users'][1]['level'].toStringAsFixed(0),
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 30),
                   ),
                   SizedBox(width: 10),
@@ -91,11 +95,13 @@ class user_primary extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              '21%',
+                              ((appState.userData['cursus_users'][1]['level'] % 1) * 100)
+                                  .toStringAsFixed(0) +
+                                  '%',
                               style: Theme.of(context).textTheme.bodyMedium,
                             ),
                             Text(
-                              'Transcender at 42cursus',
+                              appState.userData['cursus_users'][1]['cursus']['name'],
                               style: Theme.of(context).textTheme.bodyMedium,
                             ),
                           ],

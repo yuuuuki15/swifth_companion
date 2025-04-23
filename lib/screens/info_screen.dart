@@ -8,6 +8,7 @@ class InfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<AppState>();
+    print('2: login: ${appState.userData['login']}');
 
     return Scaffold(
       body: MyWidget(appState: appState),
@@ -36,7 +37,9 @@ class MyWidget extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             child: Column(
               children: [
-                user_primary(),
+                if (appState.userData.isNotEmpty) ...[
+                  user_primary(appState: appState),
+                ],
               ],
             ),
           ),
