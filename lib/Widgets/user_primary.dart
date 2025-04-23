@@ -12,7 +12,6 @@ class user_primary extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('userData: ${appState.userData}');
     return Stack(
       alignment: Alignment.center,
       children: [
@@ -43,6 +42,24 @@ class user_primary extends StatelessWidget {
                 color: Colors.white,
                 fontSize: 10,
                 fontWeight: FontWeight.normal,
+              ),
+            ),
+          ),
+        ),
+        Positioned(
+          bottom: 0,
+          left: 0,
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            decoration: BoxDecoration(
+              color: Color(0xFF333333),
+              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15)),
+            ),
+            child: Text(
+              appState.userData['cursus_users'][1]['cursus']['name'],
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 10,
               ),
             ),
           ),
