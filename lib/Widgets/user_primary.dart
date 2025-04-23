@@ -60,11 +60,7 @@ class user_primary extends StatelessWidget {
               SizedBox(height: 10),
               Text(
                 'Yuki Kawakita',
-                style: GoogleFonts.gothicA1(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w900,
-                ),
+                style: Theme.of(context).textTheme.titleLarge,
               ),
               SizedBox(height: 10),
               Row(
@@ -72,11 +68,7 @@ class user_primary extends StatelessWidget {
                 children: [
                   Text(
                     'ykawakit',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.normal,
-                    ),
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ],
               ),
@@ -87,13 +79,7 @@ class user_primary extends StatelessWidget {
                 children: [
                   Text(
                     '11',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 30,
-                      fontWeight: FontWeight.w900,
-                      fontFamily: 'Special Gothic Expanded One',
-                      letterSpacing: -1,
-                    ),
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 30),
                   ),
                   SizedBox(width: 10),
                   Expanded(
@@ -105,19 +91,11 @@ class user_primary extends StatelessWidget {
                           children: [
                             Text(
                               '21%',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 14,
-                                fontWeight: FontWeight.normal,
-                              ),
+                              style: Theme.of(context).textTheme.bodyMedium,
                             ),
                             Text(
                               'Transcender at 42cursus',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 14,
-                                fontWeight: FontWeight.normal,
-                              ),
+                              style: Theme.of(context).textTheme.bodyMedium,
                             ),
                           ],
                         ),

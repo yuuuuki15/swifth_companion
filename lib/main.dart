@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'services/api_service.dart';
 import 'models/app_state.dart';
 import 'screens/home_screen.dart';
@@ -27,6 +28,28 @@ class MyApp extends StatelessWidget {
       title: 'Swifty Companion',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.amber),
+        textTheme: TextTheme(
+          bodyLarge: GoogleFonts.gothicA1(
+            fontSize: 16,
+            fontWeight: FontWeight.w400,
+            color: Colors.white,
+          ),
+          bodyMedium: GoogleFonts.gothicA1(
+            fontSize: 14,
+            fontWeight: FontWeight.w400,
+            color: Colors.white,
+          ),
+          bodySmall: GoogleFonts.gothicA1(
+            fontSize: 12,
+            fontWeight: FontWeight.w400,
+            color: Colors.white,
+          ),
+          titleLarge: GoogleFonts.gothicA1(
+            fontSize: 24,
+            fontWeight: FontWeight.w700,
+            color: Colors.white,
+          ),
+        )
       ),
       home: const AppRouter(),
     );
