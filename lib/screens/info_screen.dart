@@ -28,23 +28,74 @@ class MyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: SingleChildScrollView(
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          decoration: BoxDecoration(
-            color: Color(0xFF5a7a2f),
-          ),
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-            child: Column(
-              children: [
-                if (appState.userData.isNotEmpty) ...[
-                  user_primary(appState: appState),
-                  SizedBox(height: 20),
-                  user_secondary(appState: appState),
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            if (constraints.maxWidth < 768) {
+              return Column(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/images/bkgrnd.jpg'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                      child: Column(
+                        children: [
+                          if (appState.userData.isNotEmpty) ...[
+                            user_primary(appState: appState),
+                            SizedBox(height: 20),
+                            user_secondary(appState: appState),
+                          ],
+                        ],
+                      ),
+                    ),
+                  ),
+                  SampleWidget(appState: appState),
                 ],
-              ],
-            ),
-          ),
+              );
+            } else {
+              return Column(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/images/bkgrnd.jpg'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          if (appState.userData.isNotEmpty) ...[
+                            Flexible(
+                              child: Container(
+                                constraints: BoxConstraints(maxHeight: 312),
+                                child: user_primary(appState: appState),
+                              ),
+                            ),
+                            SizedBox(width: 20),
+                            Flexible(
+                              child: Container(
+                                constraints: BoxConstraints(maxHeight: 312),
+                                child: user_secondary(appState: appState),
+                              ),
+                            ),
+                          ],
+                        ],
+                      ),
+                    ),
+                  ),
+                  SampleWidget(appState: appState),
+                ],
+              );
+            }
+
+          },
         ),
       ),
     );
