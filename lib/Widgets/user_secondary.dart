@@ -92,7 +92,7 @@ class user_secondary extends StatelessWidget {
                           color: Colors.white,
                         ),
                         SizedBox(width: 10),
-                        Text(appState.userData['campus'][1]['name']),
+                        Text(appState.selectedCampus['name']),
                       ],
                     ),
                   ),

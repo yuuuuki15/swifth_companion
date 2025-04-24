@@ -146,7 +146,7 @@ class user_primary extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    appState.userData['cursus_users'][1]['level'].toStringAsFixed(0),
+                    appState.selectedCursus['level'].toStringAsFixed(0),
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 30),
                   ),
                   SizedBox(width: 10),
@@ -158,13 +158,13 @@ class user_primary extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              ((appState.userData['cursus_users'][1]['level'] % 1) * 100)
+                              ((appState.selectedCursus['level'] % 1) * 100)
                                   .toStringAsFixed(0) +
                                   '%',
                               style: Theme.of(context).textTheme.bodyMedium,
                             ),
                             Text(
-                              appState.userData['cursus_users'][1]['cursus']['name'],
+                              appState.selectedCursus['cursus']['name'],
                               style: Theme.of(context).textTheme.bodyMedium,
                             ),
                           ],
