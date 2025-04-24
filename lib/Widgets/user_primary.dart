@@ -22,6 +22,7 @@ class user_primary extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Color(0xFF333333),
                 borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: Color.fromARGB(255, 142, 142, 142), width: 0.7),
               ),
             ),
           ),
@@ -37,7 +38,7 @@ class user_primary extends StatelessWidget {
               border: Border.all(color: Color.fromARGB(255, 142, 142, 142), width: 0.3),
             ),
             child: Text(
-              appState.userData['location'] != null ? appState.userData['location'] : 'unavailable',
+              appState.userData['location'] ?? 'unavailable',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 10,
@@ -49,23 +50,67 @@ class user_primary extends StatelessWidget {
         Positioned(
           bottom: 0,
           left: 0,
+          right: 0,
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(horizontal: 12, vertical: 15),
             decoration: BoxDecoration(
               color: Color(0xFF333333),
-              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15)),
+              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
+              border: Border.all(color: Color.fromARGB(255, 142, 142, 142), width: 0.3),
             ),
-            child: Text(
-              appState.userData['cursus_users'][1]['cursus']['name'],
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 10,
-              ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Row(
+
+                  children: [
+                    Text(
+                      "₳",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 1,
+                      ),
+                    ),
+                    SizedBox(width: 5),
+                    Text(
+                      appState.userData['wallet'].toString(),
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text(
+                      "Ev.P",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 1,
+                      ),
+                    ),
+                    SizedBox(width: 5),
+                    Text(
+                      appState.userData['correction_point'].toString(),
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 70),
           child: Column(
             children: [
               if (appState.userData['image']['link'] != null)

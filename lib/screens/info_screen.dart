@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/app_state.dart';
 import 'package:provider/provider.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../Widgets/user_primary.dart';
 
 class InfoPage extends StatelessWidget {
