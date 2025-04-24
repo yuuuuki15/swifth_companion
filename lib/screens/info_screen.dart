@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/app_state.dart';
 import 'package:provider/provider.dart';
 import '../Widgets/user_primary.dart';
+import '../Widgets/user_secondary.dart';
 
 class InfoPage extends StatelessWidget {
   @override
@@ -38,6 +39,8 @@ class MyWidget extends StatelessWidget {
               children: [
                 if (appState.userData.isNotEmpty) ...[
                   user_primary(appState: appState),
+                  SizedBox(height: 20),
+                  user_secondary(appState: appState),
                 ],
               ],
             ),
