@@ -3,6 +3,7 @@ import '../models/app_state.dart';
 import 'package:provider/provider.dart';
 import '../Widgets/user_primary.dart';
 import '../Widgets/user_secondary.dart';
+import '../Widgets/skills.dart';
 
 class InfoPage extends StatelessWidget {
   @override
@@ -53,7 +54,8 @@ class MyWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SampleWidget(appState: appState),
+                  Skills(appState: appState),
+                  // SampleWidget(appState: appState),
                 ],
               );
             } else {
@@ -90,7 +92,8 @@ class MyWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SampleWidget(appState: appState),
+                  Skills(appState: appState),
+                  // SampleWidget(appState: appState),
                 ],
               );
             }
