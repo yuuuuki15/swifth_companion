@@ -128,7 +128,7 @@ class user_primary extends StatelessWidget {
                 appState.userData['first_name'] + ' ' + appState.userData['last_name'],
                 style: Theme.of(context).textTheme.titleLarge,
               ),
-              SizedBox(height: 10),
+              // SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
