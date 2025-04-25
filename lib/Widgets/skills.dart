@@ -54,6 +54,9 @@ class Skills extends StatelessWidget {
                       ),
                     );
                   }).toList(),
+                ] else ...[
+                  // todo: doesn't display this text
+                  Text('No skills found'),
                 ],
               ],
             ),
