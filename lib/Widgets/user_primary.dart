@@ -195,7 +195,7 @@ class user_primary extends StatelessWidget {
                                 ),
                                 Container(
                                   height: 10,
-                                  width: constraints.maxWidth * 0.21,
+                                  width: constraints.maxWidth * (appState.selectedCursus['level'] % 1),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.only(topLeft: Radius.circular(10), bottomLeft: Radius.circular(10)),
                                     color: Color(0xFF35c47f),
