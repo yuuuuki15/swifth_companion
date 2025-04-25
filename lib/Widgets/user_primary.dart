@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../models/app_state.dart';
-import 'package:intl/intl.dart';
 
 class user_primary extends StatelessWidget {
   const user_primary({
@@ -140,7 +138,7 @@ class user_primary extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 10),
+              // SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -163,13 +161,26 @@ class user_primary extends StatelessWidget {
                                   '%',
                               style: Theme.of(context).textTheme.bodyMedium,
                             ),
-                            Text(
-                              appState.selectedCursus['cursus']['name'],
-                              style: Theme.of(context).textTheme.bodyMedium,
+                            DropdownButton<Map<String, dynamic>>(
+                              value: appState.selectedCursus,
+                              items: (appState.userData['cursus_users'] as List).map((cursus) => DropdownMenuItem<Map<String, dynamic>>(
+                                value: cursus,
+                                child: Text(cursus['cursus']['name']),
+                              )).toList(),
+                              onChanged: (Map<String, dynamic>? newValue) {
+                                if (newValue != null) {
+                                  appState.updateSelectedCursus(newValue);
+                                }
+                              },
+                              underline: Container(),
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                              dropdownColor: Color(0xFF333333),
                             ),
                           ],
                         ),
-                        SizedBox(height: 4),
+                        // SizedBox(height: 4),
                         LayoutBuilder(
                           builder: (context, constraints) {
                             return Stack(

@@ -72,10 +72,10 @@ class AppState extends ChangeNotifier {
         }
       }
 
-      this.selectedCursus = selectedCursus;
-      this.selectedCampus = selectedCampus;
-      print('selectedCampus: ${selectedCampus}');
-      print('selectedCursus: ${selectedCursus}');
+      selectedCursus = selectedCursus;
+      selectedCampus = selectedCampus;
+      print('selectedCampus: $selectedCampus');
+      print('selectedCursus: $selectedCursus');
 
       isLoading = false;
       notifyListeners();
@@ -107,6 +107,11 @@ class AppState extends ChangeNotifier {
     }
 
     isLoading = false;
+    notifyListeners();
+  }
+
+  void updateSelectedCursus(Map<String, dynamic> newCursus) {
+    selectedCursus = newCursus;
     notifyListeners();
   }
 }

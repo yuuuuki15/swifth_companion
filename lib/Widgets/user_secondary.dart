@@ -39,7 +39,7 @@ class user_secondary extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
+                  SizedBox(
                     width: 200,
                     child: Row(
                       children: [
@@ -60,7 +60,7 @@ class user_secondary extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
+                  SizedBox(
                     width: 200,
                     child: Row(
                       children: [
@@ -81,7 +81,7 @@ class user_secondary extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
+                  SizedBox(
                     width: 200,
                     child: Row(
                       children: [
@@ -102,7 +102,7 @@ class user_secondary extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
+                  SizedBox(
                     width: 200,
                     child: Row(
                       children: [
