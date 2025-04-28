@@ -12,6 +12,16 @@ class Projects extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Get the selected cursus ID
+    final selectedCursusId = appState.selectedCursus['cursus_id'];
+
+    // Filter projects for the selected cursus
+    final filteredProjects = appState.userData['projects_users'] != null
+        ? List.from(appState.userData['projects_users'])
+            .where((project) => project['cursus_ids'].contains(selectedCursusId))
+            .toList()
+        : [];
+
     return SizedBox(
       height: 400,
       child: Padding(
@@ -40,9 +50,8 @@ class Projects extends StatelessWidget {
                       ),
                     ),
                   ),
-                  if (appState.userData['projects_users'] != null &&
-                      (appState.userData['projects_users'] as List).isNotEmpty) ...[
-                    ...List.from(appState.userData['projects_users']).map((project) {
+                  if (filteredProjects.isNotEmpty) ...[
+                    ...filteredProjects.map((project) {
                       return Card(
                         color: Color(0xFFfafafa),
                         margin: EdgeInsets.symmetric(horizontal: 20, vertical: 5),

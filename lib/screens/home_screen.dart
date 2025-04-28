@@ -45,7 +45,7 @@ class HomePage extends StatelessWidget {
                     TextFormField(
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
-                        hintText: "Enter your username",
+                        hintText: "Search by username",
                         filled: true,
                         fillColor: Colors.white,
                         hintStyle: TextStyle(color: Color(0xff1e3629)),
