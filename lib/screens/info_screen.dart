@@ -9,9 +9,9 @@ class InfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<AppState>();
-    print('2: login: ${appState.userData['login']}');
 
     return Scaffold(
+      backgroundColor: Color(0xFFfafafa),
       body: MyWidget(appState: appState),
     );
   }
@@ -56,6 +56,22 @@ class MyWidget extends StatelessWidget {
                   ),
                   Skills(appState: appState),
                   Projects(appState: appState),
+                  SizedBox(height: 20),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF333333),
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                    ),
+                    onPressed: () {
+                      appState.setSelectedIndex(0);
+                    },
+                    child: Text("Back to Search"),
+                  ),
+                  SizedBox(height: 20),
                   // SampleWidget(appState: appState),
                 ],
               );
@@ -95,6 +111,22 @@ class MyWidget extends StatelessWidget {
                   ),
                   Skills(appState: appState),
                   Projects(appState: appState),
+                  SizedBox(height: 20),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF333333),
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                    ),
+                    onPressed: () {
+                      appState.setSelectedIndex(0);
+                    },
+                    child: Text("Back to Search"),
+                  ),
+                  SizedBox(height: 20),
                   // SampleWidget(appState: appState),
                 ],
               );
