@@ -9,11 +9,25 @@ class AppState extends ChangeNotifier {
   String? error;
   Map<String, dynamic> selectedCursus = {};
   Map<String, dynamic> selectedCampus = {};
+  String? _token;
+  DateTime? _tokenExpiry;
 
   final ApiService apiService = ApiService();
 
   AppState() {
     _initializeData();
+  }
+
+  Future<String> _getValidToken() async {
+    // Check if token exists and is not expired
+    if (_token != null && _tokenExpiry != null && DateTime.now().isBefore(_tokenExpiry!)) {
+      return _token!;
+    }
+
+    // Get new token if expired or not exists
+    _token = await apiService.getToken();
+    _tokenExpiry = DateTime.now().add(Duration(hours: 2));
+    return _token!;
   }
 
   Future<void> _initializeData() async {
@@ -93,7 +107,9 @@ class AppState extends ChangeNotifier {
     notifyListeners();
 
     try {
-      userData = await apiService.getUser(name);
+      final token = await _getValidToken();
+      print('Token: $token');
+      userData = await apiService.getUser(name, token);
       username = name;
       await _initializeData();
       selectedIndex = 1;
