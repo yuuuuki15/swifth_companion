@@ -144,7 +144,7 @@ class user_primary extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    appState.selectedCursus['level'].toStringAsFixed(0),
+                    appState.selectedCursus['level']?.toStringAsFixed(0) ?? 'N/A',
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(fontSize: 30),
                   ),
                   SizedBox(width: 10),

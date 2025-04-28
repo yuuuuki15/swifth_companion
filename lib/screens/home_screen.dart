@@ -50,6 +50,10 @@ class HomePage extends StatelessWidget {
                         fillColor: Colors.white,
                         hintStyle: TextStyle(color: Color(0xff1e3629)),
                       ),
+                      style: TextStyle(
+                        color: Color(0xFF333333),
+                        fontSize: 16,
+                      ),
                       onChanged: (value) {
                         username = value;
                       },

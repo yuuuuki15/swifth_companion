@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import '../services/api_service.dart';
 
 class AppState extends ChangeNotifier {
-  int selectedIndex = 1;
-  String username = 'ykawakit';
+  int selectedIndex = 0;
+  String username = '';
   Map<String, dynamic> userData = {};
   bool isLoading = false;
   String? error;
@@ -21,8 +21,8 @@ class AppState extends ChangeNotifier {
       isLoading = true;
       notifyListeners();
 
-      userData = await apiService.getUser(username);
-      print('userData: $userData');
+      // for debug
+      // userData = await apiService.getUser(username);
 
       if (userData.isNotEmpty &&
           userData['cursus_users'] != null &&
@@ -56,7 +56,6 @@ class AppState extends ChangeNotifier {
           userData['campus'].isNotEmpty) {
         try {
           selectedCampus = userData['campus'].firstWhere(
-            // priority Paris campus
             (campus) => campus['id'] == 1,
           );
         } catch (e) {
@@ -72,11 +71,6 @@ class AppState extends ChangeNotifier {
           selectedCampus = campuses.first;
         }
       }
-
-      selectedCursus = selectedCursus;
-      selectedCampus = selectedCampus;
-      // print('selectedCampus: $selectedCampus');
-      // print('selectedCursus: $selectedCursus');
 
       isLoading = false;
       notifyListeners();
@@ -101,10 +95,11 @@ class AppState extends ChangeNotifier {
     try {
       userData = await apiService.getUser(name);
       username = name;
+      await _initializeData();
       selectedIndex = 1;
     } catch (e) {
       error = e.toString();
-      print('Error: $e');
+      print('Error searching user: $e');
     }
 
     isLoading = false;
