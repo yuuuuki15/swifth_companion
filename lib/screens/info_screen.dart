@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../Widgets/user_primary.dart';
 import '../Widgets/user_secondary.dart';
 import '../Widgets/skills.dart';
-
+import '../Widgets/projects.dart';
 class InfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -55,6 +55,7 @@ class MyWidget extends StatelessWidget {
                     ),
                   ),
                   Skills(appState: appState),
+                  Projects(appState: appState),
                   // SampleWidget(appState: appState),
                 ],
               );
@@ -93,6 +94,7 @@ class MyWidget extends StatelessWidget {
                     ),
                   ),
                   Skills(appState: appState),
+                  Projects(appState: appState),
                   // SampleWidget(appState: appState),
                 ],
               );

@@ -22,6 +22,7 @@ class AppState extends ChangeNotifier {
       notifyListeners();
 
       userData = await apiService.getUser(username);
+      print('userData: $userData');
 
       if (userData.isNotEmpty &&
           userData['cursus_users'] != null &&
@@ -74,8 +75,8 @@ class AppState extends ChangeNotifier {
 
       selectedCursus = selectedCursus;
       selectedCampus = selectedCampus;
-      print('selectedCampus: $selectedCampus');
-      print('selectedCursus: $selectedCursus');
+      // print('selectedCampus: $selectedCampus');
+      // print('selectedCursus: $selectedCursus');
 
       isLoading = false;
       notifyListeners();
