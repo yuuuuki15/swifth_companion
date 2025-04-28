@@ -40,7 +40,8 @@ class Projects extends StatelessWidget {
                       ),
                     ),
                   ),
-                  if (appState.userData['projects_users'] != null) ...[
+                  if (appState.userData['projects_users'] != null &&
+                      (appState.userData['projects_users'] as List).isNotEmpty) ...[
                     ...List.from(appState.userData['projects_users']).map((project) {
                       return Card(
                         color: Color(0xFFfafafa),
@@ -72,7 +73,18 @@ class Projects extends StatelessWidget {
                       );
                     }).toList(),
                   ] else ...[
-                    Text('No projects found'),
+                    Center(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(vertical: 20),
+                        child: Text(
+                          'No projects found',
+                          style: GoogleFonts.inter(
+                            fontSize: 16,
+                            color: Color(0xFF666666),
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ],
               ),

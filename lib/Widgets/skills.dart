@@ -40,7 +40,8 @@ class Skills extends StatelessWidget {
                       ),
                     ),
                   ),
-                  if (appState.selectedCursus['skills'] != null) ...[
+                  if (appState.selectedCursus['skills'] != null &&
+                      (appState.selectedCursus['skills'] as List).isNotEmpty) ...[
                     ...List.from(appState.selectedCursus['skills']).map((skill) {
                       return Card(
                         color: Color(0xFFfafafa),
@@ -64,8 +65,18 @@ class Skills extends StatelessWidget {
                       );
                     }).toList(),
                   ] else ...[
-                    // todo: doesn't display this text
-                    Text('No skills found'),
+                    Center(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(vertical: 20),
+                        child: Text(
+                          'No skills found',
+                          style: GoogleFonts.inter(
+                            fontSize: 16,
+                            color: Color(0xFF666666),
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ],
               ),
