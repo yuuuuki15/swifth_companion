@@ -1,12 +1,13 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 class ApiService {
   String get _clientId => dotenv.env['CLIENT_ID'] ?? '';
   String get _clientSecret => dotenv.env['CLIENT_SECRET'] ?? '';
   String get _baseUrl => dotenv.env['API_URL'] ?? 'https://api.intra.42.fr/v2';
 
-  Future<String> getToken() async {
+  Future<Map<String, dynamic>> getToken() async {
     final response = await http.post(
       Uri.parse('$_baseUrl/oauth/token'),
       headers: {
@@ -21,7 +22,11 @@ class ApiService {
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
-      return data['access_token'];
+      return {
+        'access_token': data['access_token'],
+        'expires_in': data['expires_in'],
+        'created_at': data['created_at'],
+      };
     } else {
       throw Exception('Failed to get token: ${response.statusCode}');
     }

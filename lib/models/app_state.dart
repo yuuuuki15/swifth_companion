@@ -9,7 +9,7 @@ class AppState extends ChangeNotifier {
   String? error;
   Map<String, dynamic> selectedCursus = {};
   Map<String, dynamic> selectedCampus = {};
-  String? _token;
+  Map<String, dynamic> _token = {};
   DateTime? _tokenExpiry;
 
   final ApiService apiService = ApiService();
@@ -20,14 +20,16 @@ class AppState extends ChangeNotifier {
 
   Future<String> _getValidToken() async {
     // Check if token exists and is not expired
-    if (_token != null && _tokenExpiry != null && DateTime.now().isBefore(_tokenExpiry!)) {
-      return _token!;
+    if (_token.isNotEmpty && _token['access_token'] != null && _tokenExpiry != null && DateTime.now().isBefore(_tokenExpiry!)) {
+      return _token['access_token'] ?? '';
     }
 
     // Get new token if expired or not exists
     _token = await apiService.getToken();
-    _tokenExpiry = DateTime.now().add(Duration(hours: 2));
-    return _token!;
+    // expired time reference: https://api.intra.42.fr/apidoc/guides/specification
+    final int expires_in = _token['expires_in'] ?? 0;
+    _tokenExpiry = DateTime.now().add(Duration(seconds: expires_in));
+    return _token['access_token'] ?? '';
   }
 
   Future<void> _initializeData() async {
@@ -108,7 +110,6 @@ class AppState extends ChangeNotifier {
 
     try {
       final token = await _getValidToken();
-      print('Token: $token');
       userData = await apiService.getUser(name, token);
       username = name;
       await _initializeData();
