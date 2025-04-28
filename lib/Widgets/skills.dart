@@ -95,25 +95,5 @@ class Skills extends StatelessWidget {
         ),
       ),
     );
-    // return Stack(
-    //   alignment: Alignment.center,
-    //   children: [
-    //     Positioned.fill(
-    //       child: Container(
-    //         decoration: BoxDecoration(
-    //           color: Color(0xFFFFFFFF),
-    //           border: Border.all(color: Color.fromARGB(255, 142, 142, 142), width: 0.7),
-    //         ),
-    //       ),
-    //     ),
-    //     Positioned(
-    //       top: 0,
-    //       left: 0,
-    //       child: Container(
-    //         child: Text('Skills'),
-    //       ),
-    //     ),
-    //   ],
-    // );
   }
 }

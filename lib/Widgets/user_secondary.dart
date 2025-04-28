@@ -36,47 +36,49 @@ class user_secondary extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: 200,
-                    child: Row(
-                      children: [
-                        SvgPicture.asset(
-                          'assets/images/phone.svg',
-                          width: 15,
-                          height: 15,
-                          color: Colors.white,
-                        ),
-                        SizedBox(width: 10),
-                        Text(appState.userData['phone']),
-                      ],
+              if (appState.userData['phone'] != 'hidden')
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 200,
+                      child: Row(
+                        children: [
+                          SvgPicture.asset(
+                            'assets/images/phone.svg',
+                            width: 15,
+                            height: 15,
+                            color: Colors.white,
+                          ),
+                          SizedBox(width: 10),
+                          Text(appState.userData['phone']),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              ),
+                  ],
+                ),
               SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: 200,
-                    child: Row(
-                      children: [
-                        SvgPicture.asset(
-                          'assets/images/mail.svg',
-                          width: 15,
-                          height: 15,
-                          color: Colors.white,
-                        ),
-                        SizedBox(width: 10),
-                        Text(appState.userData['email']),
-                      ],
+              if (appState.userData['email'] != 'hidden')
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 200,
+                      child: Row(
+                        children: [
+                          SvgPicture.asset(
+                            'assets/images/mail.svg',
+                            width: 15,
+                            height: 15,
+                            color: Colors.white,
+                          ),
+                          SizedBox(width: 10),
+                          Text(appState.userData['email']),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              ),
+                  ],
+                ),
               SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
