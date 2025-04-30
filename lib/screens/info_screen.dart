@@ -5,6 +5,7 @@ import '../Widgets/user_primary.dart';
 import '../Widgets/user_secondary.dart';
 import '../Widgets/skills.dart';
 import '../Widgets/projects.dart';
+
 class InfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -25,232 +26,100 @@ class MyWidget extends StatelessWidget {
 
   final AppState appState;
 
+  // common button widget
+  Widget _buildBackButton() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Color(0xFF333333),
+          foregroundColor: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+        ),
+        onPressed: () => appState.setSelectedIndex(0),
+        child: Text("Back to Search"),
+      ),
+    );
+  }
+
+  // common part of background container
+  Widget _buildBackgroundContainer({required Widget child}) {
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/images/bkgrnd.jpg'),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        child: child,
+      ),
+    );
+  }
+
+  // user info section for mobile
+  Widget _buildMobileUserInfo() {
+    return Column(
+      children: [
+        if (appState.userData.isNotEmpty) ...[
+          user_primary(appState: appState),
+          SizedBox(height: 20),
+          user_secondary(appState: appState),
+        ],
+      ],
+    );
+  }
+
+  // user info section for desktop
+  Widget _buildDesktopUserInfo() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (appState.userData.isNotEmpty) ...[
+          Flexible(
+            child: Container(
+              constraints: BoxConstraints(maxHeight: 312),
+              child: user_primary(appState: appState),
+            ),
+          ),
+          SizedBox(width: 20),
+          Flexible(
+            child: Container(
+              constraints: BoxConstraints(maxHeight: 312),
+              child: user_secondary(appState: appState),
+            ),
+          ),
+        ],
+      ],
+    );
+  }
+
+  // main content
+  Widget _buildMainContent({required Widget userInfoSection}) {
+    return Column(
+      children: [
+        _buildBackgroundContainer(child: userInfoSection),
+        Skills(appState: appState),
+        Projects(appState: appState),
+        _buildBackButton(),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: SingleChildScrollView(
         child: LayoutBuilder(
           builder: (context, constraints) {
-            if (constraints.maxWidth < 768) {
-              return Column(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/images/bkgrnd.jpg'),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                      child: Column(
-                        children: [
-                          if (appState.userData.isNotEmpty) ...[
-                            user_primary(appState: appState),
-                            SizedBox(height: 20),
-                            user_secondary(appState: appState),
-                          ],
-                        ],
-                      ),
-                    ),
-                  ),
-                  Skills(appState: appState),
-                  Projects(appState: appState),
-                  SizedBox(height: 20),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFF333333),
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                    ),
-                    onPressed: () {
-                      appState.setSelectedIndex(0);
-                    },
-                    child: Text("Back to Search"),
-                  ),
-                  SizedBox(height: 20),
-                  // SampleWidget(appState: appState),
-                ],
-              );
-            } else {
-              return Column(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/images/bkgrnd.jpg'),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          if (appState.userData.isNotEmpty) ...[
-                            Flexible(
-                              child: Container(
-                                constraints: BoxConstraints(maxHeight: 312),
-                                child: user_primary(appState: appState),
-                              ),
-                            ),
-                            SizedBox(width: 20),
-                            Flexible(
-                              child: Container(
-                                constraints: BoxConstraints(maxHeight: 312),
-                                child: user_secondary(appState: appState),
-                              ),
-                            ),
-                          ],
-                        ],
-                      ),
-                    ),
-                  ),
-                  Skills(appState: appState),
-                  Projects(appState: appState),
-                  SizedBox(height: 20),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFF333333),
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                    ),
-                    onPressed: () {
-                      appState.setSelectedIndex(0);
-                    },
-                    child: Text("Back to Search"),
-                  ),
-                  SizedBox(height: 20),
-                  // SampleWidget(appState: appState),
-                ],
-              );
-            }
-
+            return constraints.maxWidth < 768
+                ? _buildMainContent(userInfoSection: _buildMobileUserInfo())
+                : _buildMainContent(userInfoSection: _buildDesktopUserInfo());
           },
-        ),
-      ),
-    );
-  }
-}
-
-class SampleWidget extends StatelessWidget {
-  const SampleWidget({
-    super.key,
-    required this.appState,
-  });
-
-  final AppState appState;
-
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              if (appState.userData.isNotEmpty) ...[
-                if (appState.userData['image_url'] != null)
-                  CircleAvatar(
-                    radius: 50,
-                    backgroundImage: NetworkImage(appState.userData['image_url']),
-                  ),
-                SizedBox(height: 20),
-
-                Text(
-                  'Login: ${appState.userData['login']}',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  'Email: ${appState.userData['email'] ?? 'Not available'}',
-                  style: TextStyle(fontSize: 16),
-                ),
-                SizedBox(height: 20),
-
-                if (appState.userData['cursus_users'] != null) ...[
-                  Text(
-                    'Cursus Information',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  ...List.from(appState.userData['cursus_users']).map((cursus) {
-                    return Card(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            Text(
-                              'Cursus: ${cursus['cursus']['name']}',
-                              style: TextStyle(fontSize: 18),
-                            ),
-                            Text(
-                              'Level: ${cursus['level']?.toStringAsFixed(2) ?? 'N/A'}',
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                  }).toList(),
-                ],
-                SizedBox(height: 20),
-
-                if (appState.userData['projects_users'] != null) ...[
-                  Text(
-                    'Projects',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  ...List.from(appState.userData['projects_users'])
-                    .where((project) => project['status'] == 'finished')
-                    .map((project) {
-                      final bool isPassed = project['validated?'] ?? false;
-                      return Card(
-                        child: ListTile(
-                          title: Text(project['project']['name']),
-                          subtitle: Text('Final mark: ${project['final_mark'] ?? 'N/A'}'),
-                          trailing: Icon(
-                            isPassed ? Icons.check_circle : Icons.cancel,
-                            color: isPassed ? Colors.green : Colors.red,
-                          ),
-                        ),
-                      );
-                    }).toList(),
-                ],
-                SizedBox(height: 20),
-
-                if (appState.userData['cursus_users'] != null &&
-                    appState.userData['cursus_users'].isNotEmpty &&
-                    appState.userData['cursus_users'][0]['skills'] != null) ...[
-                  Text(
-                    'Skills',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  ...List.from(appState.userData['cursus_users'][0]['skills']).map((skill) {
-                    return Card(
-                      child: ListTile(
-                        title: Text(skill['name']),
-                        trailing: Text('Level: ${skill['level']?.toStringAsFixed(2) ?? 'N/A'}'),
-                      ),
-                    );
-                  }).toList(),
-                ],
-              ],
-
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  appState.setSelectedIndex(0);
-                },
-                child: Text("Back to Search")
-              ),
-            ],
-          ),
         ),
       ),
     );
