@@ -5,6 +5,7 @@ import '../Widgets/user_primary.dart';
 import '../Widgets/user_secondary.dart';
 import '../Widgets/skills.dart';
 import '../Widgets/projects.dart';
+import '../Widgets/home_button.dart';
 
 class InfoPage extends StatelessWidget {
   @override
@@ -25,25 +26,6 @@ class MyWidget extends StatelessWidget {
   });
 
   final AppState appState;
-
-  // common button widget
-  Widget _buildBackButton() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Color(0xFF333333),
-          foregroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
-          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-        ),
-        onPressed: () => appState.setSelectedIndex(0),
-        child: Text("Back to Search"),
-      ),
-    );
-  }
 
   // common part of background container
   Widget _buildBackgroundContainer({required Widget child}) {
@@ -105,7 +87,7 @@ class MyWidget extends StatelessWidget {
         _buildBackgroundContainer(child: userInfoSection),
         Skills(appState: appState),
         Projects(appState: appState),
-        _buildBackButton(),
+        HomeButton(appState: appState),
       ],
     );
   }

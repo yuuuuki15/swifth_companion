@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'models/app_state.dart';
 import 'screens/home_screen.dart';
 import 'screens/info_screen.dart';
+import 'screens/error_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -72,7 +73,8 @@ class AppRouter extends StatelessWidget {
         page = InfoPage();
         break;
       default:
-        throw UnimplementedError('no widget for ${appState.selectedIndex}');
+        page = ErrorPage("Page not found", appState);
+        break;
     }
 
     return Scaffold(
