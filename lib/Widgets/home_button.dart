@@ -19,7 +19,10 @@ class HomeButton extends StatelessWidget {
           ),
           padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
         ),
-        onPressed: () => appState.setSelectedIndex(0),
+        onPressed: () {
+          appState.setSelectedIndex(0);
+          appState.username = '';
+        },
         child: Text("Back to Home"),
       ),
     );

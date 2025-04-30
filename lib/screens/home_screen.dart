@@ -6,7 +6,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<AppState>();
-    String username = '';
+    String username = appState.username;
 
     return Scaffold(
       body: Container(
@@ -43,12 +43,14 @@ class HomePage extends StatelessWidget {
                 child: Column(
                   children: [
                     TextFormField(
+                      controller: TextEditingController(text: username),
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: "Search by username",
                         filled: true,
                         fillColor: Colors.white,
                         hintStyle: TextStyle(color: Color(0xff1e3629)),
+
                       ),
                       style: TextStyle(
                         color: Color(0xFF333333),

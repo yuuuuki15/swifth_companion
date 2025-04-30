@@ -91,7 +91,7 @@ class AppState extends ChangeNotifier {
       isLoading = false;
       notifyListeners();
     } catch (e) {
-      error = e.toString();
+      error = "Failed to initialize data";
       isLoading = false;
       notifyListeners();
       print('Error initializing data: $e');
@@ -110,12 +110,12 @@ class AppState extends ChangeNotifier {
 
     try {
       final token = await _getValidToken();
-      userData = await apiService.getUser(name, token);
       username = name;
+      userData = await apiService.getUser(name, token);
       await _initializeData();
       selectedIndex = 1;
     } catch (e) {
-      error = e.toString();
+      error = "User not found";
       print('Error searching user: $e');
     }
 
