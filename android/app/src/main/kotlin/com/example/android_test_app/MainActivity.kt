@@ -1,4 +1,4 @@
-package ft.android_test_app
+package ft.swifty_companion
 
 import io.flutter.embedding.android.FlutterActivity
 
