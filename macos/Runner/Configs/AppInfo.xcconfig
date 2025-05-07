@@ -8,7 +8,7 @@
 PRODUCT_NAME = swifty_companion
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.example.swiftyCompanion
+PRODUCT_BUNDLE_IDENTIFIER = ft.swiftyCompanion
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2025 com.example. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2025 ft. All rights reserved.

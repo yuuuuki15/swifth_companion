@@ -9,7 +9,7 @@ plugins {
 }
 
 android {
-    namespace = "ft.android_test_app"
+    namespace = "com.ft.swifty_companion"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = "27.0.12077973"
 
@@ -24,7 +24,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "ft.android_test_app"
+        applicationId = "com.ft.swifty_companion"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
@@ -51,10 +51,18 @@ android {
     }
 
     buildTypes {
-        release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            // signingConfig = signingConfigs.getByName("debug")
+        // release {
+        //     // TODO: Add your own signing config for the release build.
+        //     // Signing with the debug keys for now, so `flutter run --release` works.
+        //     signingConfig = signingConfigs.getByName("debug")
+        // }
+        getByName("debug") {
+            resValue("string", "app_name", "(d)symfony-companion")
+            applicationIdSuffix = ".debug"
+            versionNameSuffix = "-d"
+        }
+        getByName("release") {
+            resValue("string", "app_name", "symfony-companion")
             signingConfig = signingConfigs.getByName("release")
         }
     }
