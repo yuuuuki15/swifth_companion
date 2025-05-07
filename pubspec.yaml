@@ -23,6 +23,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.14.3
 
   flutter_lints: ^2.0.0
 
@@ -31,3 +32,9 @@ flutter:
   assets:
     - .env
     - assets/images/
+
+flutter_icons:
+  android: true
+  image_path: "assets/icon/icon.png"
+  adaptive_icon_background: "assets/icon/white.png"
+  adaptive_icon_foreground: "assets/icon/icon.png"

@@ -14,7 +14,7 @@ void main() async {
   runApp(
     ChangeNotifierProvider(
       create: (_) => AppState(),
-      child: const MyApp()
+      child: const MyApp(),
     ),
   );
 }
@@ -52,7 +52,9 @@ class MyApp extends StatelessWidget {
           ),
         )
       ),
-      home: const AppRouter(),
+      home: Consumer<AppState>(
+        builder: (context, appState, child) => const AppRouter(),
+      ),
     );
   }
 }
