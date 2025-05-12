@@ -36,9 +36,10 @@ class ApiService {
 
   Future<Map<String, dynamic>> getUser(String login, String token) async {
     try {
+      final sanitizedLogin = sanitizeLogin(login);
       final response = await http
           .get(
-            Uri.parse('$_baseUrl/users/$login'),
+            Uri.parse('$_baseUrl/users/$sanitizedLogin'),
             headers: {'Authorization': 'Bearer $token'},
           )
           .timeout(Duration(seconds: 5));
@@ -55,5 +56,10 @@ class ApiService {
     } catch (e) {
       throw Exception('Unexpected error: $e');
     }
+  }
+
+  String sanitizeLogin(String login) {
+    // Remove all whitespace characters (spaces, tabs, newlines) and trim
+    return login.trim().replaceAll(RegExp(r'\s+'), '_');
   }
 }

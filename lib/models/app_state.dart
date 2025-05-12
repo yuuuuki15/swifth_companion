@@ -37,9 +37,6 @@ class AppState extends ChangeNotifier {
       isLoading = true;
       notifyListeners();
 
-      // for debug
-      // userData = await apiService.getUser(username);
-
       if (userData.isNotEmpty &&
           userData['cursus_users'] != null &&
           userData['cursus_users'].isNotEmpty) {
